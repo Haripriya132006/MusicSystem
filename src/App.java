@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import com.organization.musicsearch.exception.ArtistnotfoundException;
 import com.organization.musicsearch.exception.SongnotfoundException;
 import com.organization.musicsearch.model.*;
 import com.organization.musicsearch.repository.SongRepository;
@@ -55,7 +56,16 @@ public class App {
                 }
                 break;
             case 4:
-                System.out.println("")
+                System.out.println("Artist workSpace");
+                try{
+                    System.out.println("Enter Artist Id - case sensitive");
+                    String id=sc.next();
+                    artistview(id,songRepository);
+                }
+                catch (ArtistnotfoundException e){
+                    System.out.println(e.getMessage());
+                }
+                break;
             default:
                 System.out.println("Invalic choice");
                 break;
@@ -63,9 +73,17 @@ public class App {
         sc.close();
     }
     // checking adding songs by artist
-    public static void artistview(){
+    public static void artistview(String id,SongRepository songRepository) throws ArtistnotfoundException{
         ArtistRepository artistRepository=new ArtistRepository();
         artistRepository.add(new Artist("A1", "hp", "hello", "hp@gmail.com"));
         artistRepository.add(new Artist("A2", "ts", "bye", "ts@gmail.com"));
+        ArtistService artistService=new ArtistService(artistRepository.fetchUser(id),songRepository);
+        System.out.println("Hello Artist "+artistRepository.fetchUser(id).getName());
+        System.out.println("Enter songname");
+        System.out.println("Enter Genre");
+        Scanner sc=new Scanner(System.in);
+        String name=sc.nextLine();
+        String genre=sc.nextLine();
+        artistService.addsong(name, genre);
     }
 }

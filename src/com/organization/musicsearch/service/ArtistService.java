@@ -9,17 +9,18 @@ public class ArtistService {
     Artist artist;
 
     SongRepository songRepository;
-    ArtistService(Artist artist,SongRepository songRepository){
+    public ArtistService(Artist artist,SongRepository songRepository){
         this.artist=artist;
         this.songRepository=songRepository;
     }
 
     public int viewsgenerator(int counter){
-        return (int)(counter*125.43256);
+        return (int)Math.random()*1000;
     }
 
     public void addsong(String songname,String genre){
-        
-        songRepository.add(new Song("song"+String.valueOf(counter), songname, artist.getName(), genre, viewsgenerator(counter)));
+        int views=viewsgenerator(counter);
+        songRepository.add(new Song("song"+String.valueOf(counter), songname, artist.getName(), genre, views));
+        System.out.println("Song "+songname + " is added successfully with views "+ views);
     }
 }
