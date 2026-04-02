@@ -15,7 +15,7 @@ public class ArtistService {
     }
 
     public int viewsgenerator(int counter){
-        return (int)Math.random()*1000;
+        return (int)(Math.random()*10000);
     }
 
     public void addsong(String songname,String genre){
