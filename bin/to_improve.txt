@@ -1,0 +1,2 @@
+add artist as artist has to add songs 
+with the help of Artist Service we add songs 
